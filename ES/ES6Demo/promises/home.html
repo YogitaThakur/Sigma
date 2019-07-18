@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<script type="text/javascript">
+
+var app = angular.module('serviceApp', []);
+
+app.controller('serviceCtrl', function ($scope, $http) {
+
+$http({
+
+method: 'GET',
+
+url: 'https://jsonplaceholder.typicode.com/users'
+
+}).then(function success(response) {
+
+$scope.myWelcome = response.data;
+
+$scope.statusval = response.status;
+
+$scope.statustext = response.statusText;
+
+$scope.headers = response.headers();
+
+}, function error(response) {
+
+});
+
+});
+
+</script>
+
+</head>
+
+<body>
+
+<div ng-app="serviceApp" ng-controller="serviceCtrl">
+
+<p>Hi, Guest</p>
+
+{{myWelcome}}
+
+<p>StatusCode: {{statusval}}</p>
+
+<p>Status: {{statustext}}</p>
+
+<p>Response Headers: {{headers}}</p>
+
+</div>
+
+</body>
+
+</html>
